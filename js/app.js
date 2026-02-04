@@ -163,7 +163,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!overwrite && !confirm('Додати 400+ позицій до вашого списку?')) return;
             if (overwrite && !confirm('УВАГА: Всі ваші дані будуть видалені і замінені базою. Продовжити?')) return;
 
-            const baseData = typeof CATALOG_2026 !== 'undefined' ? CATALOG_2026 : [];
+            // FIX: Correct variable name from data.js
+            const baseData = typeof FULL_CATALOG !== 'undefined' ? FULL_CATALOG : [];
+            
+            if (baseData.length === 0) return alert('Помилка: База даних не знайдена!');
+
             let startId = this.getNewId();
             
             const prep = (arr) => arr.map(r => ({...r, id: startId++, done: false, qty: 0}));
