@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Буд-Майстер 2026</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <h1>🏗️ Буд-Майстер</h1>
+        <div class="controls">
+            <button id="btnTheme" class="icon-btn" aria-label="Тема">🌓</button>
+            <button id="btnEditMode" class="icon-btn" aria-label="Редагування">✏️</button>
+        </div>
+    </div>
+</header>
+
+<div class="sticky-panel">
+    <div class="search-container">
+        <input type="text" id="searchBox" placeholder="🔍 Пошук робіт..." autocomplete="off">
+        <div id="searchSuggestions" class="suggestions-list"></div>
+    </div>
+    
+    <div class="actions-row">
+        <select id="filterType">
+            <option value="">Всі розділи</option>
+        </select>
+        <button id="btnExport" class="action-btn success">📄 CSV</button>
+        <button id="btnBackup" class="action-btn purple">💾 Save</button>
+        <button id="btnImportMenu" class="action-btn warning hidden">📥 Load</button>
+    </div>
+    <input type="file" id="fileInput" accept=".json" hidden>
+</div>
+
+<main class="container">
+    <!-- Totals -->
+    <div class="totals-grid">
+        <div class="card total-done">
+            <div class="label">✅ Виконано</div>
+            <div class="value" id="valDone">0.00 ₴</div>
+        </div>
+        <div class="card total-plan">
+            <div class="label">📋 План</div>
+            <div class="value" id="valPlan">0.00 ₴</div>
+        </div>
+    </div>
+
+    <!-- Done Table -->
+    <section class="section">
+        <div class="section-header">
+            <h2>Виконані роботи</h2>
+            <span class="count-badge" id="countDone">0</span>
+        </div>
+        <div class="table-wrapper">
+            <table id="tableDone">
+                <thead>
+                    <tr>
+                        <th width="30">🆗</th>
+                        <th>Робота</th>
+                        <th width="70">Ціна</th>
+                        <th width="60">К-сть</th>
+                        <th width="80">Сума</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Repair Table -->
+    <section class="section">
+        <div class="section-header">
+            <h2>🛠️ Ремонт</h2>
+            <button class="add-btn hidden" onclick="app.addNewRow('repair')">+</button>
+        </div>
+        <div class="table-wrapper">
+            <table id="tableRepair">
+                <thead>
+                    <tr>
+                        <th width="30">🆗</th>
+                        <th>Робота</th>
+                        <th width="70">Ціна</th>
+                        <th width="60">К-сть</th>
+                        <th width="80">Сума</th>
+                        <th class="col-del hidden" width="30">🗑️</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Build Table -->
+    <section class="section">
+        <div class="section-header">
+            <h2>🏗️ Будівництво</h2>
+            <button class="add-btn hidden" onclick="app.addNewRow('build')">+</button>
+        </div>
+        <div class="table-wrapper">
+            <table id="tableBuild">
+                <thead>
+                    <tr>
+                        <th width="30">🆗</th>
+                        <th>Робота</th>
+                        <th width="70">Ціна</th>
+                        <th width="60">К-сть</th>
+                        <th width="80">Сума</th>
+                        <th class="col-del hidden" width="30">🗑️</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<!-- Import Modal -->
+<div id="modalImport" class="modal">
+    <div class="modal-content">
+        <h3>Управління даними</h3>
+        <div class="modal-body">
+            <button class="modal-btn primary" onclick="app.importBase(false)">➕ Додати Базу 2026 (400+)</button>
+            <button class="modal-btn danger" onclick="app.importBase(true)">⚠️ Перезаписати Базою</button>
+            <hr>
+            <button class="modal-btn" onclick="document.getElementById('fileInput').click()">📂 Відкрити мій файл</button>
+        </div>
+        <button class="modal-btn secondary" onclick="document.getElementById('modalImport').style.display='none'">Скасувати</button>
+    </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
